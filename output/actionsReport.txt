@@ -1,0 +1,45 @@
+The list of sentences sorted according to the number of words in them:
+
+1) The if-then Statement
+2) The if-then-else Statement
+3) The if-then and if-then-else Statements
+4) Omitting them can make the code more brittle.
+5) The output from the program is: "Grade = C".
+6) One possible implementation of the applyBrakes method could be as follows:
+7) Deciding when to omit the braces is a matter of personal taste.
+8) The if-then statement is the most basic of all the control flow statements.
+9) The compiler cannot catch this sort of error; you'll just get the wrong results.
+10) In addition, the opening and closing braces are optional, provided that the "then" clause contains only one statement:
+11) The if-then-else statement provides a secondary path of execution when an "if" clause evaluates to false.
+12) It tells your program to execute a certain section of code only if a particular test evaluates to true.
+13) In this case, the action is to simply print an error message stating that the bicycle has already stopped.
+14) However, once a condition is satisfied, the appropriate statements are executed (grade = 'C';) and the remaining conditions are not evaluated.
+15) For example, the Bicycle class could allow the brakes to decrease the bicycle's speed only if the bicycle is already in motion.
+16) If a second statement is later added to the "then" clause, a common mistake would be forgetting to add the newly required braces.
+17) If this test evaluates to false (meaning that the bicycle is not in motion), control jumps to the end of the if-then statement.
+18) You may have noticed that the value of testscore can satisfy more than one expression in the compound statement: 76 >= 70 and 76 >= 60.
+19) You could use an if-then-else statement in the applyBrakes method to take some action if the brakes are applied when the bicycle is not in motion.
+20) The following program, IfElseDemo, assigns a grade based on the value of a test score: an A for a score of 90% or above, a B for a score of 80% or above, and so on.
+
+The list of sentences with the excluded substring of maximum length that starts with 'f' char and ends with 'm' char:
+
+1) The ients
+2) The ient
+3) The ients.
+4) It tells your program to execute a certain section of code only if a particular test evaluates to true.
+5) For example, the Bicycle class could allow the brakes to decrease the bicycle's speed only iotion.
+6) One possible implementation oethod could be as follows:
+7) Ient.
+8) In addition, the opening and closing braces are optional, provided that the "then" clause contains only one statement:
+9) Deciding when to omit the braces is a matter of personal taste.
+10) Omitting them can make the code more brittle.
+11) Iistake would be forgetting to add the newly required braces.
+12) The compiler cannot catch this sort of error; you'll just get the wrong results.
+13) The ient
+14) The ient provides a secondary path of execution when an "if" clause evaluates to false.
+15) You could use an iotion.
+16) In this case, the action is to simply print an error message stating that the bicycle has already stopped.
+17) The o, assigns a grade based on the value of a test score: an A for a score of 90% or above, a B for a score of 80% or above, and so on.
+18) The output  is: "Grade = C".
+19) You may have noticed that the value oent: 76 >= 70 and 76 >= 60.
+20) However, once a condition is satisaining conditions are not evaluated.
