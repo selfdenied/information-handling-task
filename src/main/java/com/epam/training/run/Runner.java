@@ -17,9 +17,10 @@ public class Runner {
 	}
 
 	public static void main(String[] args) {
-		PrintReportManager reportManager = new PrintReportManager();
 		LOG.info("Initializing the program...");
+		PrintReportManager reportManager = new PrintReportManager();
+		/* printing a report */
 		reportManager.printReport();
-		LOG.info("Finished with no errors...");
+		LOG.info("Finished...");
 	}
 }

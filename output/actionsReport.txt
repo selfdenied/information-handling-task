@@ -21,7 +21,7 @@ The list of sentences sorted according to the number of words in them:
 19) You could use an if-then-else statement in the applyBrakes method to take some action if the brakes are applied when the bicycle is not in motion.
 20) The following program, IfElseDemo, assigns a grade based on the value of a test score: an A for a score of 90% or above, a B for a score of 80% or above, and so on.
 
-The list of sentences with the excluded substring of maximum length that starts with 'f' char and ends with 'm' char:
+The list of sentences (original order) with the excluded substring of maximum length that starts with 'f' char and ends with 'm' char:
 
 1) The ients
 2) The ient

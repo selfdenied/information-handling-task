@@ -18,6 +18,6 @@ public interface IComponent {
 	public int listOfComponentsSize();
 
 	public void parse();
-	
+
 	public String reconstruct();
 }

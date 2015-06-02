@@ -11,6 +11,6 @@ public class Constants {
 	public static final String NEW_LINE_SYMBOL = "\n";
 	public static final String REPORT_ACTION_ONE_MESSAGE = "The list of sentences sorted according to the"
 			+ " number of words in them:\n\n";
-	public static final String REPORT_ACTION_TWO_MESSAGE = "\nThe list of sentences with the excluded substring"
-			+ " of maximum length that starts with 'f' char and ends with 'm' char:\n\n";
+	public static final String REPORT_ACTION_TWO_MESSAGE = "\nThe list of sentences (original order) with "
+			+ "the excluded substring of maximum length that starts with 'f' char and ends with 'm' char:\n\n";
 }

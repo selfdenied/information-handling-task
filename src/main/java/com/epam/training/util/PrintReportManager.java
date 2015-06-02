@@ -5,35 +5,40 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.epam.training.constant.Constants;
-import com.epam.training.entity.ComponentType;
-import com.epam.training.entity.IComponent;
-import com.epam.training.entity.TextComposite;
-import com.epam.training.logic.ActionOne;
-import com.epam.training.logic.ActionTwo;
+import com.epam.training.entity.*;
+import com.epam.training.exception.IllegalSetValueException;
+import com.epam.training.logic.*;
 
 public class PrintReportManager {
 	/* getting the logger reference */
-	private static final Logger LOG = Logger
-			.getLogger(PrintReportManager.class);
+	private static final Logger LOG = Logger.getLogger(PrintReportManager.class);
 
+	/*
+	 * method prints the report, including the text reconstructed 
+	 * after parsing, and two actions performed with text
+	 */
 	public void printReport() {
 		LOG.info("Reading text from file...");
 		String content = FileReadWriteManager
 				.readTextFromFile(Constants.INPUT_FILE_PATH);
-		IComponent text = new TextComposite(ComponentType.TEXT, content);
+		try {
+			IComponent text = new TextComposite(ComponentType.TEXT, content);
+			LOG.info("Parsing text from file...");
+			text.parse();
 
-		LOG.info("Parsing text from file...");
-		text.parse();
+			LOG.info("Reconstructing text and writing into an output file...");
+			FileReadWriteManager.writeIntoFile(text.reconstruct(),
+					Constants.RECONSTRUCTED_FILE_PATH);
 
-		LOG.info("Reconstructing text and writing into an output file...");
-		FileReadWriteManager.writeIntoFile(text.reconstruct(),
-				Constants.RECONSTRUCTED_FILE_PATH);
-
-		LOG.info("Printing a report of required text actions...");
-		FileReadWriteManager.writeIntoFile(reportOfActionOne(text)
-				+ reportOfActionTwo(text), Constants.REPORT_FILE_PATH);
+			LOG.info("Printing a report of required text actions...");
+			FileReadWriteManager.writeIntoFile(reportOfActionOne(text)
+					+ reportOfActionTwo(text), Constants.REPORT_FILE_PATH);
+		} catch (IllegalSetValueException exception) {
+			LOG.error(exception.getMessage(), exception);
+		}
 	}
 
+	/* supplementary method that forms a report of the first action */
 	private String reportOfActionOne(IComponent text) {
 		ActionOne action1 = new ActionOne();
 		List<IComponent> listOfSentences = action1
@@ -49,6 +54,7 @@ public class PrintReportManager {
 		return builder.toString();
 	}
 
+	/* supplementary method that forms a report of the second action */
 	private String reportOfActionTwo(IComponent text) {
 		ActionTwo action2 = new ActionTwo();
 		List<String> listOfSentences = action2.removeMaxSubstringFromSentences(

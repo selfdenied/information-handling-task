@@ -1,8 +1,8 @@
 package com.epam.training.exception;
 
 /* 
- * the exception is thrown when the operation is
- * is not supported for the element
+ * the exception is thrown when an operation is
+ * is not supported by the element
  */
 public class OperationNotSupportedException extends Exception {
 	private static final long serialVersionUID = 1L;

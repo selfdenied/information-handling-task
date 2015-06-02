@@ -50,6 +50,5 @@ public class FileReadWriteManager {
 		} catch (IOException exception) {
 			LOG.error("Error. Unable to write into file!", exception);
 		}
-		return;
 	}
 }
