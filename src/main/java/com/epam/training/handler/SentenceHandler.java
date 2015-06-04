@@ -9,7 +9,7 @@ import com.epam.training.entity.ComponentType;
 import com.epam.training.entity.IComponent;
 
 /* the class that handles sentence composite objects */
-public class SentenceHandler implements IHandler {
+class SentenceHandler implements IHandler {
 	/* getting the logger reference */
 	private static final Logger LOG = Logger.getLogger(SentenceHandler.class);
 	private List<IComponent> listOfSubParts;

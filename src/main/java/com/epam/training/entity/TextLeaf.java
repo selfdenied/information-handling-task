@@ -1,7 +1,6 @@
 package com.epam.training.entity;
 
 import com.epam.training.exception.IllegalSetValueException;
-import com.epam.training.exception.OperationNotSupportedException;
 
 /* the class describes a leaf element of the text */
 public class TextLeaf implements IComponent {
@@ -18,17 +17,15 @@ public class TextLeaf implements IComponent {
 
 	/* method is not supported by leaf elements */
 	@Override
-	public void addComponent(IComponent component)
-			throws OperationNotSupportedException {
-		throw new OperationNotSupportedException(
+	public void addComponent(IComponent component) {
+		throw new UnsupportedOperationException(
 				"Error. That kind of operation is not supported by the element!");
 	}
 
 	/* method is not supported by leaf elements */
 	@Override
-	public void removeComponent(IComponent component)
-			throws OperationNotSupportedException {
-		throw new OperationNotSupportedException(
+	public void removeComponent(IComponent component) {
+		throw new UnsupportedOperationException(
 				"Error. That kind of operation is not supported by the element!");
 	}
 

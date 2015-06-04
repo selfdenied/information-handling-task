@@ -1,15 +1,11 @@
 package com.epam.training.entity;
 
-import com.epam.training.exception.OperationNotSupportedException;
-
 /* the component interface (implemented by both the composites and the leaves) */
 public interface IComponent {
 
-	public void addComponent(IComponent component)
-			throws OperationNotSupportedException;
+	public void addComponent(IComponent component);
 
-	public void removeComponent(IComponent component)
-			throws OperationNotSupportedException;
+	public void removeComponent(IComponent component);
 
 	public IComponent getComponent(int index);
 

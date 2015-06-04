@@ -7,7 +7,7 @@ import com.epam.training.entity.ComponentType;
 import com.epam.training.entity.IComponent;
 
 /* the class that handles text composite objects */
-public class TextHandler implements IHandler {
+class TextHandler implements IHandler {
 	private IHandler nextHandler;
 
 	@Override

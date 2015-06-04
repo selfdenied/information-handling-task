@@ -6,7 +6,7 @@ import com.epam.training.entity.ComponentType;
 import com.epam.training.entity.IComponent;
 
 /* common interface for handlers */
-public interface IHandler {
+interface IHandler {
 
 	/* sets the next handler in the chain of handlers */
 	public void setNextHandler(IHandler handler);

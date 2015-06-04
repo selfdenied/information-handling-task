@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import com.epam.training.constant.Constants;
 import com.epam.training.entity.*;
 import com.epam.training.exception.IllegalSetValueException;
-import com.epam.training.exception.OperationNotSupportedException;
 
 /* the class for parsing the text into sub-elements */
 public class TextParser {
@@ -61,8 +60,6 @@ public class TextParser {
 				}
 				component.addComponent(part);
 			}
-		} catch (OperationNotSupportedException exception) {
-			LOG.error(exception.getMessage(), exception);
 		} catch (IllegalSetValueException exception) {
 			LOG.error(exception.getMessage(), exception);
 		}
@@ -80,8 +77,6 @@ public class TextParser {
 				part = new TextComposite(ComponentType.SENTENCE, matcher.group());
 				component.addComponent(part);
 			}
-		} catch (OperationNotSupportedException exception) {
-			LOG.error(exception.getMessage(), exception);
 		} catch (IllegalSetValueException exception) {
 			LOG.error(exception.getMessage(), exception);
 		}
@@ -105,8 +100,6 @@ public class TextParser {
 				part = new TextLeaf(partType, element);
 				component.addComponent(part);
 			} 
-		} catch (OperationNotSupportedException exception) {
-			LOG.error(exception.getMessage(), exception);
 		} catch (IllegalSetValueException exception) {
 			LOG.error(exception.getMessage(), exception);
 		}
