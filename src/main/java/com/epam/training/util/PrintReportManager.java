@@ -8,6 +8,7 @@ import com.epam.training.constant.Constants;
 import com.epam.training.entity.*;
 import com.epam.training.exception.IllegalSetValueException;
 import com.epam.training.logic.*;
+import com.epam.training.parser.TextParser;
 
 public class PrintReportManager {
 	/* getting the logger reference */
@@ -22,9 +23,9 @@ public class PrintReportManager {
 		String content = FileReadWriteManager
 				.readTextFromFile(Constants.INPUT_FILE_PATH);
 		try {
-			IComponent text = new TextComposite(ComponentType.TEXT, content);
+			IComponent text = new TextComposite(ComponentType.TEXT);
 			LOG.info("Parsing text from file...");
-			text.parse();
+			text = TextParser.parse(text, content);
 
 			LOG.info("Reconstructing text and writing into an output file...");
 			FileReadWriteManager.writeIntoFile(text.reconstruct(),
@@ -48,7 +49,7 @@ public class PrintReportManager {
 		builder.append(Constants.REPORT_ACTION_ONE_MESSAGE);
 		for (int i = 0; i < listOfSentences.size(); i++) {
 			builder.append(i + 1).append(") ");
-			builder.append(listOfSentences.get(i).toString().trim());
+			builder.append(listOfSentences.get(i).reconstruct().trim());
 			builder.append(Constants.NEW_LINE_SYMBOL);
 		}
 		return builder.toString();

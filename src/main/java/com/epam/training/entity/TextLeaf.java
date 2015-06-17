@@ -47,12 +47,6 @@ public class TextLeaf implements IComponent {
 		return 0;
 	}
 
-	/* no need to parse leaf elements */
-	@Override
-	public void parse() {
-		return;
-	}
-
 	/* returns the content of the leaf */
 	@Override
 	public String reconstruct() {

@@ -23,7 +23,7 @@ public class ActionTwo {
 
 		for (IComponent sentence : listOfSentences) {
 			listOfModifiedSentences.add(sentenceWithSubstringRemoved(
-					sentence.toString(), startChar, endChar));
+					sentence.reconstruct(), startChar, endChar));
 		}
 		return listOfModifiedSentences;
 	}

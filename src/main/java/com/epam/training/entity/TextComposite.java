@@ -4,18 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.epam.training.exception.IllegalSetValueException;
-import com.epam.training.parser.TextParser;
 
 /* the class describes a composite element of the text */
 public class TextComposite implements IComponent {
 	private ComponentType componentType;
-	private String content;
 	private List<IComponent> listOfComponents = new ArrayList<IComponent>();
 
-	public TextComposite(ComponentType componentType, String content)
+	public TextComposite(ComponentType componentType)
 			throws IllegalSetValueException {
 		setComponentType(componentType);
-		setContent(content);
 	}
 
 	/* overriden interface methods */
@@ -50,16 +47,6 @@ public class TextComposite implements IComponent {
 		return listOfComponents.size();
 	}
 
-	/* method that splits the composite element into the list of sub-elements */
-	@Override
-	public void parse() {
-		TextParser.parse(this);
-		/* recursive call of the method for each sub-element */
-		for (IComponent component : listOfComponents) {
-			component.parse();
-		}
-	}
-
 	/* method that reconstructs the text after parsing */
 	@Override
 	public String reconstruct() {
@@ -71,7 +58,7 @@ public class TextComposite implements IComponent {
 		return builder.toString();
 	}
 
-	/* setters with validation */
+	/* setter with validation */
 	public void setComponentType(ComponentType componentType)
 			throws IllegalSetValueException {
 		switch (componentType) {
@@ -84,19 +71,5 @@ public class TextComposite implements IComponent {
 			throw new IllegalSetValueException(
 					"Error. Composite elements can have either TEXT, PARAGRAPH or SENTENCE type!");
 		}
-	}
-
-	public void setContent(String content) throws IllegalSetValueException {
-		if (content != null) {
-			this.content = content;
-		} else {
-			throw new IllegalSetValueException(
-					"Error. Cannot accept 'null' values. Enter a proper element content!");
-		}
-	}
-
-	@Override
-	public String toString() {
-		return content;
 	}
 }

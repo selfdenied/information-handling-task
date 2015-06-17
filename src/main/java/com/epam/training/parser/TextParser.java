@@ -19,75 +19,78 @@ public class TextParser {
 			.getBundle(Constants.REG_EXP_FILE_NAME);
 
 	/* this method chooses a parsing procedure depending on the component type */
-	public static void parse(IComponent component) {
+	public static IComponent parse(IComponent component, String content) {
 		ComponentType componentType = component.getComponentType();
+		IComponent compositeElement = null;
 
 		switch (componentType) {
 		case TEXT:
-			parseToParagraphsAndListings(component);
+			compositeElement = parseToParagraphsAndListings(component, content);
 			break;
 		case PARAGRAPH:
-			parseToSentences(component);
+			compositeElement = parseToSentences(component, content);
 			break;
 		case SENTENCE:
-			parseToWordsAndMarks(component);
+			compositeElement = parseToWordsAndMarks(component, content);
 			break;
 		default:
 			LOG.warn("Warning. Parsing the leaf element will have no effect!");
 			break;
 		}
+		return compositeElement;
 	}
 
 	/*
 	 * Important! Code blocks should start with a small letter (or @ symbol,
-	 * i.e. @Override) and have a blank line after the end of code. That's an
-	 * indication of the code block we use in reg exps to separate text into
-	 * paragraphs and listings
+	 * i.e. @Override) and have at least one blank line after the end of code.
+	 * That's an indication of the code block we use in reg exps to separate
+	 * text into paragraphs and listings
 	 */
-	private static void parseToParagraphsAndListings(IComponent component) {
-		IComponent part = null;
-		String textContent = component.toString();
+	private static IComponent parseToParagraphsAndListings(IComponent text, String content) {
 		Pattern pattern = Pattern.compile(rb.getString("splitText"));
-		Matcher matcher = pattern.matcher(textContent);
+		Matcher matcher = pattern.matcher(content);
 
 		try {
 			while (matcher.find()) {
+				IComponent listing;
+				IComponent paragraph = new TextComposite(ComponentType.PARAGRAPH);
 				if (matcher.group().matches(rb.getString("findParagraphsInText"))) {
-					part = new TextComposite(ComponentType.PARAGRAPH, matcher.group());
+					paragraph = parseToSentences(paragraph, matcher.group());
+					text.addComponent(paragraph);
 				}
 				if (matcher.group().matches(rb.getString("findListingsInText"))) {
-					part = new TextLeaf(ComponentType.LISTING, matcher.group());
+					listing = new TextLeaf(ComponentType.LISTING, matcher.group());
+					text.addComponent(listing);
 				}
-				component.addComponent(part);
 			}
 		} catch (IllegalSetValueException exception) {
 			LOG.error(exception.getMessage(), exception);
 		}
+		return text;
 	}
 
 	/* splits a paragraph into sentences */
-	private static void parseToSentences(IComponent component) {
-		IComponent part = null;
-		String textContent = component.toString();
+	private static IComponent parseToSentences(IComponent paragraph, String content) {
 		Pattern pattern = Pattern.compile(rb.getString("splitParagraph"));
-		Matcher matcher = pattern.matcher(textContent);
+		Matcher matcher = pattern.matcher(content);
 
 		try {
 			while (matcher.find()) {
-				part = new TextComposite(ComponentType.SENTENCE, matcher.group());
-				component.addComponent(part);
+				IComponent sentence = new TextComposite(ComponentType.SENTENCE);
+				sentence = parseToWordsAndMarks(sentence, matcher.group());
+				paragraph.addComponent(sentence);
 			}
 		} catch (IllegalSetValueException exception) {
 			LOG.error(exception.getMessage(), exception);
 		}
+		return paragraph;
 	}
 
 	/* splits a sentence into words and punctuation marks */
-	private static void parseToWordsAndMarks(IComponent component) {
+	private static IComponent parseToWordsAndMarks(IComponent sentence, String content) {
 		IComponent part = null;
-		String textContent = component.toString();
 		Pattern pattern = Pattern.compile(rb.getString("splitSentence"));
-		String[] textElements = pattern.split(textContent);
+		String[] textElements = pattern.split(content);
 
 		try {
 			for (String element : textElements) {
@@ -98,10 +101,11 @@ public class TextParser {
 					partType = ComponentType.PUNCT_MARK;
 				}
 				part = new TextLeaf(partType, element);
-				component.addComponent(part);
-			} 
+				sentence.addComponent(part);
+			}
 		} catch (IllegalSetValueException exception) {
 			LOG.error(exception.getMessage(), exception);
 		}
+		return sentence;
 	}
 }

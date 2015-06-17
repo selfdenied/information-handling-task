@@ -22,5 +22,6 @@ public class Runner {
 		/* printing a report */
 		reportManager.printReport();
 		LOG.info("Finished...");
+
 	}
 }
