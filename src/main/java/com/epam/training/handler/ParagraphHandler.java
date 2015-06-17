@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.epam.training.entity.ComponentType;
 import com.epam.training.entity.IComponent;
+import com.epam.training.exception.IllegalSetValueException;
 
 /* the class that handles paragraph composite objects */
 class ParagraphHandler implements IHandler {
@@ -16,8 +17,14 @@ class ParagraphHandler implements IHandler {
 	private List<IComponent> listOfSubParts;
 
 	@Override
-	public void setNextHandler(IHandler nextHandler) {
-		this.nextHandler = nextHandler;
+	public void setNextHandler(IHandler nextHandler)
+			throws IllegalSetValueException {
+		if (nextHandler != null) {
+			this.nextHandler = nextHandler;
+		} else {
+			throw new IllegalSetValueException(
+					"Error. Cannot accept 'null' values!");
+		}
 	}
 
 	@Override

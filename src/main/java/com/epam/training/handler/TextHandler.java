@@ -5,14 +5,21 @@ import java.util.List;
 
 import com.epam.training.entity.ComponentType;
 import com.epam.training.entity.IComponent;
+import com.epam.training.exception.IllegalSetValueException;
 
 /* the class that handles text composite objects */
 class TextHandler implements IHandler {
 	private IHandler nextHandler;
 
 	@Override
-	public void setNextHandler(IHandler nextHandler) {
-		this.nextHandler = nextHandler;
+	public void setNextHandler(IHandler nextHandler)
+			throws IllegalSetValueException {
+		if (nextHandler != null) {
+			this.nextHandler = nextHandler;
+		} else {
+			throw new IllegalSetValueException(
+					"Error. Cannot accept 'null' values!");
+		}
 	}
 
 	@Override

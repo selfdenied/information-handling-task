@@ -7,8 +7,8 @@ import com.epam.training.exception.IllegalSetValueException;
 
 /* the class describes a composite element of the text */
 public class TextComposite implements IComponent {
-	private ComponentType componentType;
-	private List<IComponent> listOfComponents = new ArrayList<IComponent>();
+	private ComponentType componentType; // the type of composite element
+	private List<IComponent> listOfComponents = new ArrayList<IComponent>(); // children
 
 	public TextComposite(ComponentType componentType)
 			throws IllegalSetValueException {

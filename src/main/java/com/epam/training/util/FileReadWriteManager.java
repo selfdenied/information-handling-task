@@ -15,7 +15,8 @@ import com.epam.training.constant.Constants;
 /* the class contains static methods for reading/writing from/into a file */
 public class FileReadWriteManager {
 	/* getting the logger reference */
-	private static final Logger LOG = Logger.getLogger(FileReadWriteManager.class);
+	private static final Logger LOG = Logger
+			.getLogger(FileReadWriteManager.class);
 
 	/*
 	 * method allows reading from file using the standard java.io.BufferedReader

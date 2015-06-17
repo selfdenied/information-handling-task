@@ -5,7 +5,7 @@ package com.epam.training.exception;
  * while setting a parameter of an entity
  */
 public class IllegalSetValueException extends Exception {
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = -5503506907604173856L;
 	private String description;
 
 	/* constructor with a description */

@@ -12,11 +12,12 @@ import com.epam.training.parser.TextParser;
 
 public class PrintReportManager {
 	/* getting the logger reference */
-	private static final Logger LOG = Logger.getLogger(PrintReportManager.class);
+	private static final Logger LOG = Logger
+			.getLogger(PrintReportManager.class);
 
 	/*
-	 * method prints the report, including the text reconstructed 
-	 * after parsing, and two actions performed with text
+	 * method prints the report, including the text reconstructed after parsing,
+	 * and two actions performed with text
 	 */
 	public void printReport() {
 		LOG.info("Reading text from file...");
@@ -40,7 +41,8 @@ public class PrintReportManager {
 	}
 
 	/* supplementary method that forms a report of the first action */
-	private String reportOfActionOne(IComponent text) {
+	private String reportOfActionOne(IComponent text)
+			throws IllegalSetValueException {
 		ActionOne action1 = new ActionOne();
 		List<IComponent> listOfSentences = action1
 				.allSentencesInTextSorted(text);
@@ -56,7 +58,8 @@ public class PrintReportManager {
 	}
 
 	/* supplementary method that forms a report of the second action */
-	private String reportOfActionTwo(IComponent text) {
+	private String reportOfActionTwo(IComponent text)
+			throws IllegalSetValueException {
 		ActionTwo action2 = new ActionTwo();
 		List<String> listOfSentences = action2.removeMaxSubstringFromSentences(
 				text, 'f', 'm');

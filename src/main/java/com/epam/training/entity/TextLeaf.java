@@ -9,8 +9,8 @@ public class TextLeaf implements IComponent {
 
 	public TextLeaf(ComponentType componentType, String content)
 			throws IllegalSetValueException {
+		this.content = content;
 		setComponentType(componentType);
-		setContent(content);
 	}
 
 	/* overriden interface methods */
@@ -53,7 +53,12 @@ public class TextLeaf implements IComponent {
 		return toString();
 	}
 
-	/* setters with validation */
+	@Override
+	public String toString() {
+		return content;
+	}
+
+	/* setter with validation */
 	public void setComponentType(ComponentType componentType)
 			throws IllegalSetValueException {
 		switch (componentType) {
@@ -66,19 +71,5 @@ public class TextLeaf implements IComponent {
 			throw new IllegalSetValueException(
 					"Error. Leaf elements can have either WORD, LISTING or PUNCT_MARK type!");
 		}
-	}
-
-	public void setContent(String content) throws IllegalSetValueException {
-		if (content != null) {
-			this.content = content;
-		} else {
-			throw new IllegalSetValueException(
-					"Error. Cannot accept 'null' values. Enter a proper element content!");
-		}
-	}
-
-	@Override
-	public String toString() {
-		return content;
 	}
 }

@@ -20,24 +20,22 @@ public class TextParser {
 
 	/* this method chooses a parsing procedure depending on the component type */
 	public static IComponent parse(IComponent component, String content) {
-		ComponentType componentType = component.getComponentType();
-		IComponent compositeElement = null;
 
-		switch (componentType) {
+		switch (component.getComponentType()) {
 		case TEXT:
-			compositeElement = parseToParagraphsAndListings(component, content);
+			component = parseToParagraphsAndListings(component, content);
 			break;
 		case PARAGRAPH:
-			compositeElement = parseToSentences(component, content);
+			component = parseToSentences(component, content);
 			break;
 		case SENTENCE:
-			compositeElement = parseToWordsAndMarks(component, content);
+			component = parseToWordsAndMarks(component, content);
 			break;
 		default:
 			LOG.warn("Warning. Parsing the leaf element will have no effect!");
 			break;
 		}
-		return compositeElement;
+		return component;
 	}
 
 	/*
@@ -52,14 +50,13 @@ public class TextParser {
 
 		try {
 			while (matcher.find()) {
-				IComponent listing;
-				IComponent paragraph = new TextComposite(ComponentType.PARAGRAPH);
 				if (matcher.group().matches(rb.getString("findParagraphsInText"))) {
+					IComponent paragraph = new TextComposite(ComponentType.PARAGRAPH);
 					paragraph = parseToSentences(paragraph, matcher.group());
 					text.addComponent(paragraph);
 				}
 				if (matcher.group().matches(rb.getString("findListingsInText"))) {
-					listing = new TextLeaf(ComponentType.LISTING, matcher.group());
+					IComponent listing = new TextLeaf(ComponentType.LISTING, matcher.group());
 					text.addComponent(listing);
 				}
 			}
@@ -88,7 +85,6 @@ public class TextParser {
 
 	/* splits a sentence into words and punctuation marks */
 	private static IComponent parseToWordsAndMarks(IComponent sentence, String content) {
-		IComponent part = null;
 		Pattern pattern = Pattern.compile(rb.getString("splitSentence"));
 		String[] textElements = pattern.split(content);
 
@@ -100,7 +96,7 @@ public class TextParser {
 				} else {
 					partType = ComponentType.PUNCT_MARK;
 				}
-				part = new TextLeaf(partType, element);
+				IComponent part = new TextLeaf(partType, element);
 				sentence.addComponent(part);
 			}
 		} catch (IllegalSetValueException exception) {
